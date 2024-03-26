@@ -1,0 +1,27 @@
+var flex;
+var temp;
+var pulse;
+var url;
+
+function setup() {
+}
+
+function loop() {
+	flex = analogRead(A0);//read flex sensor value
+	temp = analogRead(A1);//read temperature sensor value
+	pulse = analogRead(A2);//read pulse sensor value
+	temp=(temp*(200/1023)-100);//convert adc number to temperature
+	flex=((flex*360)/401);//convert adc number to position (degrees)
+	pulse=((pulse*200)/1023);//convert adc number to heart pulse
+	Serial.println("position:" + flex);//print to console position
+	Serial.println("temperature:" + temp);//print to console temperature
+	Serial.println("pulse:" + pulse);//print to console pulse rate
+	url = "https://api.thingspeak.com/update?api_key=JLW0AVNP5IC6OWB4&field1="+flex+"&field2="+temp+"&field3="+pulse;
+	var http = new RealHTTPClient();
+	http.onDone = function(status, data) {
+		Serial.println("status: " + status);
+		Serial.println("data: " + data);
+	};
+	http.get(url);
+	delay(16000);
+}
