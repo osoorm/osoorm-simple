@@ -16,7 +16,7 @@ function loop() {
 	Serial.println("position:" + flex);//print to console position
 	Serial.println("temperature:" + temp);//print to console temperature
 	Serial.println("pulse:" + pulse);//print to console pulse rate
-	url = "https://api.thingspeak.com/update?api_key=JLW0AVNP5IC6OWB4&field1="+flex+"&field2="+temp+"&field3="+pulse;
+	url = "https://api.thingspeak.com/update?api_key=000000000000000000000&field1="+flex+"&field2="+temp+"&field3="+pulse;
 	var http = new RealHTTPClient();
 	http.onDone = function(status, data) {
 		Serial.println("status: " + status);
